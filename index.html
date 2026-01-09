@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="MAToken - 安全便捷的Web3数字钱包，支持以太坊、BSC、Solana等多链资产管理。立即下载体验去中心化的数字资产管理。">
+    <meta name="keywords" content="MAToken, Web3钱包, 数字钱包, 加密货币钱包, DeFi, 多链钱包, 以太坊钱包, Solana钱包">
+    <meta property="og:title" content="MAToken - Web3数字钱包">
+    <meta property="og:description" content="安全便捷的去中心化数字钱包，支持多链资产管理">
+    <meta property="og:image" content="logo.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MAToken - Web3数字钱包">
+    <meta name="twitter:description" content="安全便捷的去中心化数字钱包，支持多链资产管理">
+    <title>MAToken Web3钱包 - 下载页面</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .card-hover:hover,
+        .card-hover:active {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        .mobile-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+            .hero-subtitle {
+                font-size: 1.125rem !important;
+            }
+            .download-card {
+                margin-bottom: 1rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr 1fr !important;
+            }
+            .lang-toggle {
+                font-size: 0.875rem !important;
+                padding: 0.25rem 0.5rem !important;
+            }
+        }
+        .lang-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        .lang-toggle.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        [data-lang="en"] .zh-only,
+        [data-lang="zh"] .en-only {
+            display: none !important;
+        }
+        .phone-mockup {
+            background: linear-gradient(145deg, #2d3748, #1a202c);
+            border-radius: 2rem;
+            padding: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .feature-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-4 px-4 sticky top-0 z-50">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <img src="logo.jpg" alt="MAToken Logo" class="w-10 h-10 rounded-lg">
+                <h1 class="text-xl font-bold">MAToken</h1>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6 items-center">
+                <div class="flex space-x-2">
+                    <button class="lang-toggle" data-lang-btn="zh">中文</button>
+                    <button class="lang-toggle" data-lang-btn="en">EN</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-overlay" class="mobile-overlay fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden">
+        <div id="mobile-menu" class="mobile-menu fixed left-0 top-0 h-full w-64 bg-white shadow-xl z-50">
+            <div class="p-4">
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center space-x-3">
+                        <img src="logo.jpg" alt="MAToken Logo" class="w-8 h-8 rounded-lg">
+                        <h2 class="text-lg font-bold text-gray-900">MAToken</h2>
+                    </div>
+                    <button id="mobile-close-btn" class="w-8 h-8 flex items-center justify-center">
+                        <i class="fas fa-times text-gray-600"></i>
+                    </button>
+                </div>
+                <nav class="space-y-4">
+                    <div class="pt-4 border-t border-gray-200">
+                        <div class="flex space-x-2 justify-center">
+                            <button class="lang-toggle" data-lang-btn="zh">中文</button>
+                            <button class="lang-toggle" data-lang-btn="en">EN</button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="py-12 px-4">
+        <div class="container mx-auto text-center">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="hero-title text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    <span class="zh-only">MAToken Web3钱包</span>
+                    <span class="en-only">MAToken Web3 Wallet</span>
+                </h2>
+                <p class="hero-subtitle text-base md:text-lg text-gray-600 mb-8">
+                    <span class="zh-only">安全、便捷的去中心化数字钱包，支持多链资产管理，让您的加密资产安全无忧</span>
+                    <span class="en-only">Secure and convenient decentralized digital wallet supporting multi-chain asset management, keeping your crypto assets safe and worry-free</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-12 px-4 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-3">
+                <span class="zh-only">核心功能</span>
+                <span class="en-only">Core Features</span>
+            </h2>
+            <p class="text-lg text-center text-gray-600 mb-10">
+                <span class="zh-only">为您提供安全、便捷的数字资产管理体验</span>
+                <span class="en-only">Providing you with secure and convenient digital asset management</span>
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <div class="text-center p-4">
+                    <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-shield-alt text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="font-semibold mb-1">
+                        <span class="zh-only">安全存储</span>
+                        <span class="en-only">Secure Storage</span>
+                    </h3>
+                    <p class="text-sm text-gray-500">
+                        <span class="zh-only">本地加密私钥</span>
+                        <span class="en-only">Local encrypted keys</span>
+                    </p>
+                </div>
+                <div class="text-center p-4">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-link text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="font-semibold mb-1">
+                        <span class="zh-only">多链支持</span>
+                        <span class="en-only">Multi-Chain</span>
+                    </h3>
+                    <p class="text-sm text-gray-500">
+                        <span class="zh-only">ETH/BSC/Solana</span>
+                        <span class="en-only">ETH/BSC/Solana</span>
+                    </p>
+                </div>
+                <div class="text-center p-4">
+                    <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-exchange-alt text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="font-semibold mb-1">
+                        <span class="zh-only">便捷交易</span>
+                        <span class="en-only">Easy Swap</span>
+                    </h3>
+                    <p class="text-sm text-gray-500">
+                        <span class="zh-only">一键兑换代币</span>
+                        <span class="en-only">One-click token swap</span>
+                    </p>
+                </div>
+                <div class="text-center p-4">
+                    <div class="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-cube text-2xl text-orange-600"></i>
+                    </div>
+                    <h3 class="font-semibold mb-1">
+                        <span class="zh-only">DApp浏览器</span>
+                        <span class="en-only">DApp Browser</span>
+                    </h3>
+                    <p class="text-sm text-gray-500">
+                        <span class="zh-only">探索Web3生态</span>
+                        <span class="en-only">Explore Web3 ecosystem</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supported Chains Section -->
+    <section class="py-12 px-4">
+        <div class="container mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-6">
+                <span class="zh-only">支持的区块链</span>
+                <span class="en-only">Supported Blockchains</span>
+            </h2>
+            <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10 max-w-3xl mx-auto">
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2">
+                        <svg class="w-7 h-7" viewBox="0 0 32 32"><path fill="#627EEA" d="M16 0c8.837 0 16 7.163 16 16s-7.163 16-16 16S0 24.837 0 16 7.163 0 16 0z"/><path fill="#FFF" fill-opacity=".6" d="M16.498 4v8.87l7.497 3.35z"/><path fill="#FFF" d="M16.498 4L9 16.22l7.498-3.35z"/><path fill="#FFF" fill-opacity=".6" d="M16.498 21.968v6.027L24 17.616z"/><path fill="#FFF" d="M16.498 27.995v-6.028L9 17.616z"/><path fill="#FFF" fill-opacity=".2" d="M16.498 20.573l7.497-4.353-7.497-3.348z"/><path fill="#FFF" fill-opacity=".6" d="M9 16.22l7.498 4.353v-7.701z"/></svg>
+                    </div>
+                    <span class="text-sm font-medium">Ethereum</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2">
+                        <svg class="w-7 h-7" viewBox="0 0 32 32"><path fill="#F3BA2F" d="M16 0c8.837 0 16 7.163 16 16s-7.163 16-16 16S0 24.837 0 16 7.163 0 16 0z"/><path fill="#FFF" d="M12.116 14.404L16 10.52l3.886 3.886 2.26-2.26L16 6l-6.144 6.144 2.26 2.26zM6 16l2.26-2.26L10.52 16l-2.26 2.26L6 16zm6.116 1.596L16 21.48l3.886-3.886 2.26 2.259L16 26l-6.144-6.144-.003-.003 2.263-2.257zM21.48 16l2.26-2.26L26 16l-2.26 2.26L21.48 16zm-3.188-.002h.002L16 13.706l-2.293 2.293-.004.003.004.003.084.084.208.208L16 18.294l2.293-2.293.002-.003h-.003z"/></svg>
+                    </div>
+                    <span class="text-sm font-medium">BNB Chain</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2">
+                        <svg class="w-7 h-7" viewBox="0 0 32 32"><defs><linearGradient id="sol" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00FFA3"/><stop offset="100%" stop-color="#DC1FFF"/></linearGradient></defs><circle fill="url(#sol)" cx="16" cy="16" r="16"/><path fill="#FFF" d="M10.5 20.2c.1-.1.3-.2.5-.2h12.3c.3 0 .5.4.3.6l-2.4 2.4c-.1.1-.3.2-.5.2H8.4c-.3 0-.5-.4-.3-.6l2.4-2.4zm0-8.4c.1-.1.3-.2.5-.2h12.3c.3 0 .5.4.3.6l-2.4 2.4c-.1.1-.3.2-.5.2H8.4c-.3 0-.5-.4-.3-.6l2.4-2.4zm13.1 4.1c-.1-.1-.3-.2-.5-.2H10.8c-.3 0-.5.4-.3.6l2.4 2.4c.1.1.3.2.5.2h12.3c.3 0 .5-.4.3-.6l-2.4-2.4z"/></svg>
+                    </div>
+                    <span class="text-sm font-medium">Solana</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2">
+                        <svg class="w-7 h-7" viewBox="0 0 32 32"><circle fill="#8247E5" cx="16" cy="16" r="16"/><path fill="#FFF" d="M21.092 12.693c-.369-.215-.848-.215-1.254 0l-2.879 1.654-1.955 1.078-2.879 1.653c-.369.216-.848.216-1.254 0l-2.288-1.294c-.369-.215-.627-.61-.627-1.042V12.19c0-.431.221-.826.627-1.042l2.25-1.258c.37-.216.85-.216 1.256 0l2.25 1.258c.37.216.628.611.628 1.042v1.654l1.955-1.115v-1.653a1.16 1.16 0 00-.627-1.042l-4.17-2.372c-.369-.216-.848-.216-1.254 0l-4.244 2.372A1.16 1.16 0 006 11.076v4.78c0 .432.221.827.627 1.043l4.244 2.372c.369.215.849.215 1.254 0l2.879-1.618 1.955-1.114 2.879-1.617c.369-.216.848-.216 1.254 0l2.251 1.258c.37.215.627.61.627 1.042v2.552c0 .431-.22.826-.627 1.042l-2.25 1.294c-.37.216-.85.216-1.255 0l-2.251-1.258c-.37-.216-.628-.611-.628-1.042v-1.654l-1.955 1.115v1.653c0 .431.221.827.627 1.042l4.244 2.372c.369.216.848.216 1.254 0l4.244-2.372c.369-.215.627-.61.627-1.042v-4.78a1.16 1.16 0 00-.627-1.042l-4.28-2.409z"/></svg>
+                    </div>
+                    <span class="text-sm font-medium">Polygon</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2">
+                        <svg class="w-7 h-7" viewBox="0 0 32 32"><circle fill="#E84142" cx="16" cy="16" r="16"/><path fill="#FFF" d="M20.9 18.5c.3-.5.9-.5 1.2 0l2.4 4.2c.3.5 0 1.1-.6 1.1h-4.8c-.6 0-.9-.6-.6-1.1l2.4-4.2zm-4.5-7.8c.3-.5.9-.5 1.2 0l5.3 9.2c.3.5 0 1.1-.6 1.1H9.7c-.6 0-.9-.6-.6-1.1l5.3-9.2z"/></svg>
+                    </div>
+                    <span class="text-sm font-medium">Avalanche</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2">
+                        <svg class="w-7 h-7" viewBox="0 0 32 32"><circle fill="#FF0420" cx="16" cy="16" r="16"/><circle fill="#FFF" cx="16" cy="16" r="7"/><circle fill="#FF0420" cx="16" cy="16" r="3.5"/></svg>
+                    </div>
+                    <span class="text-sm font-medium">Optimism</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="py-12 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-3">
+                <span class="zh-only">立即下载</span>
+                <span class="en-only">Download Now</span>
+            </h2>
+            <p class="text-lg text-center text-gray-600 mb-8">
+                <span class="zh-only">选择您的平台，开始使用MAToken钱包</span>
+                <span class="en-only">Choose your platform to start using MAToken Wallet</span>
+            </p>
+            
+            <div class="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- iOS Download -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 md:w-20 md:h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fab fa-apple text-3xl md:text-4xl text-gray-800"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-2">
+                            <span class="zh-only">iOS 版本</span>
+                            <span class="en-only">iOS Version</span>
+                        </h3>
+                        <p class="text-gray-600 mb-4 text-sm md:text-base">
+                            <span class="zh-only">通过 TestFlight 安装测试版</span>
+                            <span class="en-only">Install beta via TestFlight</span>
+                        </p>
+                        <a href="https://testflight.apple.com/join/Y5kpC7Q8" target="_blank" rel="noopener noreferrer" class="block w-full bg-gray-800 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-900 transition text-center mb-4">
+                            <i class="fas fa-download mr-2"></i>
+                            <span class="zh-only">TestFlight 下载</span>
+                            <span class="en-only">Download on TestFlight</span>
+                        </a>
+                        <div class="hidden md:block">
+                            <p class="text-xs text-gray-500 mb-2">
+                                <span class="zh-only">扫码下载</span>
+                                <span class="en-only">Scan to download</span>
+                            </p>
+                            <div class="bg-white p-2 rounded-lg inline-block border">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://testflight.apple.com/join/Y5kpC7Q8" alt="iOS QR Code" class="w-20 h-20">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t pt-4">
+                        <h4 class="font-semibold mb-3 text-sm">
+                            <span class="zh-only">版本信息</span>
+                            <span class="en-only">Version Info</span>
+                        </h4>
+                        <div class="space-y-2 text-xs">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">
+                                    <span class="zh-only">当前版本:</span>
+                                    <span class="en-only">Current Version:</span>
+                                </span>
+                                <span class="font-medium">v1.0.0 Beta</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">
+                                    <span class="zh-only">平台:</span>
+                                    <span class="en-only">Platform:</span>
+                                </span>
+                                <span class="font-medium">iOS 14.0+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Android Download -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 md:w-20 md:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fab fa-android text-3xl md:text-4xl text-green-600"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-2">
+                            <span class="zh-only">Android 版本</span>
+                            <span class="en-only">Android Version</span>
+                        </h3>
+                        <p class="text-gray-600 mb-4 text-sm md:text-base">
+                            <span class="zh-only">支持 Android 6.0 及以上版本</span>
+                            <span class="en-only">Support Android 6.0 and above</span>
+                        </p>
+                        <a href="https://pub-7f3d82f53363484c8d4f6a346d92560a.r2.dev/application.apk" class="block w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition text-center mb-4" download>
+                            <i class="fas fa-download mr-2"></i>
+                            <span class="zh-only">APK 直接下载</span>
+                            <span class="en-only">Download APK</span>
+                        </a>
+                        <div class="hidden md:block">
+                            <p class="text-xs text-gray-500 mb-2">
+                                <span class="zh-only">扫码下载</span>
+                                <span class="en-only">Scan to download</span>
+                            </p>
+                            <div class="bg-white p-2 rounded-lg inline-block border">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://pub-7f3d82f53363484c8d4f6a346d92560a.r2.dev/application.apk" alt="Android QR Code" class="w-20 h-20">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t pt-4">
+                        <h4 class="font-semibold mb-3 text-sm">
+                            <span class="zh-only">版本信息</span>
+                            <span class="en-only">Version Info</span>
+                        </h4>
+                        <div class="space-y-2 text-xs">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">
+                                    <span class="zh-only">当前版本:</span>
+                                    <span class="en-only">Current Version:</span>
+                                </span>
+                                <span class="font-medium">v1.0.0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">
+                                    <span class="zh-only">更新时间:</span>
+                                    <span class="en-only">Updated:</span>
+                                </span>
+                                <span class="font-medium">2026-01-04</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">
+                                    <span class="zh-only">文件大小:</span>
+                                    <span class="en-only">File Size:</span>
+                                </span>
+                                <span class="font-medium">170.5 MB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Guide Section -->
+    <section class="py-12 px-4 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-2xl font-bold text-center mb-8">
+                <span class="zh-only">安装指南</span>
+                <span class="en-only">Installation Guide</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- iOS Guide -->
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center mr-3">
+                            <i class="fab fa-apple text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">
+                            <span class="zh-only">iOS 安装步骤</span>
+                            <span class="en-only">iOS Installation</span>
+                        </h3>
+                    </div>
+                    <ol class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start">
+                            <span class="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xs font-bold mr-3 flex-shrink-0">1</span>
+                            <span class="zh-only">点击下载按钮，跳转至 TestFlight</span>
+                            <span class="en-only">Click download button to open TestFlight</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xs font-bold mr-3 flex-shrink-0">2</span>
+                            <span class="zh-only">如未安装 TestFlight，先从 App Store 下载</span>
+                            <span class="en-only">Install TestFlight from App Store if needed</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xs font-bold mr-3 flex-shrink-0">3</span>
+                            <span class="zh-only">在 TestFlight 中点击"接受"并安装</span>
+                            <span class="en-only">Accept and install in TestFlight</span>
+                        </li>
+                    </ol>
+                </div>
+                <!-- Android Guide -->
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center mr-3">
+                            <i class="fab fa-android text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">
+                            <span class="zh-only">Android 安装步骤</span>
+                            <span class="en-only">Android Installation</span>
+                        </h3>
+                    </div>
+                    <ol class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start">
+                            <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold mr-3 flex-shrink-0">1</span>
+                            <span class="zh-only">点击下载 APK 文件</span>
+                            <span class="en-only">Click to download the APK file</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold mr-3 flex-shrink-0">2</span>
+                            <span class="zh-only">打开文件，允许"未知来源"安装</span>
+                            <span class="en-only">Open file, allow "Unknown sources" install</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold mr-3 flex-shrink-0">3</span>
+                            <span class="zh-only">点击"安装"完成安装</span>
+                            <span class="en-only">Tap "Install" to complete</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 px-4">
+        <div class="container mx-auto">
+            <div class="flex flex-col items-center text-center">
+                <div class="mb-6">
+                    <div class="flex items-center justify-center mb-3">
+                        <img src="logo.jpg" alt="MAToken Logo" class="w-8 h-8 rounded-lg mr-2">
+                        <span class="text-2xl font-bold">MAToken</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        <span class="zh-only">安全可靠的Web3数字钱包</span>
+                        <span class="en-only">Secure and reliable Web3 digital wallet</span>
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 w-full max-w-lg">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-3">
+                            <span class="zh-only">关注我们</span>
+                            <span class="en-only">Follow Us</span>
+                        </h4>
+                        <div class="flex justify-center space-x-3">
+                            <a href="https://twitter.com/MATokenWallet" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-purple-400 transition" title="Twitter">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                            <a href="https://t.me/MATokenOfficial" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-purple-400 transition" title="Telegram">
+                                <i class="fab fa-telegram text-xl"></i>
+                            </a>
+                            <a href="https://discord.gg/MAToken" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-purple-400 transition" title="Discord">
+                                <i class="fab fa-discord text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-3">
+                            <span class="zh-only">支持</span>
+                            <span class="en-only">Support</span>
+                        </h4>
+                        <ul class="space-y-1 text-sm">
+                            <li><a href="#" class="text-gray-400 hover:text-purple-400 transition">
+                                <span class="zh-only">联系我们</span>
+                                <span class="en-only">Contact Us</span>
+                            </a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-purple-400 transition">
+                                <span class="zh-only">用户协议</span>
+                                <span class="en-only">Terms of Service</span>
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-700 pt-4 mt-4 w-full">
+                    <p class="text-center text-gray-500 text-xs">&copy; <span id="current-year">2026</span> MAToken. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language switching functionality
+        let currentLang = localStorage.getItem('language') || 'zh';
+        
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('language', lang);
+            document.documentElement.setAttribute('data-lang', lang);
+            
+            // Update button states
+            document.querySelectorAll('.lang-toggle').forEach(btn => {
+                if (btn.getAttribute('data-lang-btn') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Update mobile menu navigation links
+            updateMobileNavLinks();
+        }
+        
+        function updateMobileNavLinks() {
+            // No navigation links to update
+        }
+        
+        // Initialize language
+        setLanguage(currentLang);
+        
+        // Set dynamic year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Language toggle button event listeners
+        document.querySelectorAll('.lang-toggle').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang-btn');
+                setLanguage(lang);
+            });
+        });
+        
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileCloseBtn = document.getElementById('mobile-close-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            mobileOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', openMobileMenu);
+        mobileCloseBtn.addEventListener('click', closeMobileMenu);
+        mobileOverlay.addEventListener('click', closeMobileMenu);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Add touch feedback for mobile
+        if ('ontouchstart' in window) {
+            document.querySelectorAll('.card-hover, button, a').forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                element.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+            });
+        }
+
+        // Prevent zoom on input focus for mobile
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+            document.addEventListener('focus', function(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+                }
+            }, true);
+            
+            document.addEventListener('blur', function() {
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+            }, true);
+        }
+    </script>
+</body>
+</html>
