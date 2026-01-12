@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MAToken - 专业的加密钱包解决方案，为企业和个人用户提供安全、便捷的多链数字资产管理服务">
+    <meta name="keywords" content="MAToken, 加密钱包, 数字钱包, B2B钱包, 企业钱包, Web3钱包, 多链钱包">
+    <title>MAToken - 专业的加密钱包解决方案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        * {
+            scroll-behavior: smooth;
+        }
+        body { 
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-10%, -10%) scale(1.1); }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .card-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .card-hover:hover::before {
+            opacity: 1;
+        }
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.25);
+        }
+        .section-padding {
+            padding: 6rem 0;
+        }
+        .navbar-scroll {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+        }
+        .navbar-scroll a:not(.bg-white) {
+            color: #1f2937 !important;
+        }
+        .navbar-scroll span {
+            color: #1f2937 !important;
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .service-card {
+            border: 2px solid #f3f4f6;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        .service-card:hover::after {
+            left: 100%;
+        }
+        .service-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+            transform: translateY(-8px);
+        }
+        .price-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stat-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+        .icon-wrapper {
+            transition: all 0.3s ease;
+        }
+        .service-card:hover .icon-wrapper {
+            transform: scale(1.1) rotate(5deg);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+        .bg-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
+        }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+        .service-card .icon-wrapper {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 4rem 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <img src="logo.jpg" alt="MAToken Logo" class="w-10 h-10 rounded-lg">
+                    <span class="text-xl font-bold text-white">MAToken</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-white hover:text-purple-200 transition">首页</a>
+                    <a href="#services" class="text-white hover:text-purple-200 transition">服务</a>
+                    <a href="#b2b" class="text-white hover:text-purple-200 transition">企业服务</a>
+                    <a href="#b2c" class="text-white hover:text-purple-200 transition">个人服务</a>
+                    <a href="#about" class="text-white hover:text-purple-200 transition">关于我们</a>
+                    <a href="#contact" class="bg-white text-purple-600 px-6 py-2 rounded-lg font-semibold hover:bg-purple-50 transition">联系我们</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-white">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden md:hidden">
+        <div class="bg-white w-64 h-full p-6">
+            <div class="flex justify-between items-center mb-8">
+                <span class="text-xl font-bold">菜单</span>
+                <button id="mobile-close-btn" class="text-gray-600">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <nav class="space-y-4">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-purple-600">首页</a>
+                <a href="#services" class="block py-2 text-gray-700 hover:text-purple-600">服务</a>
+                <a href="#b2b" class="block py-2 text-gray-700 hover:text-purple-600">企业服务</a>
+                <a href="#b2c" class="block py-2 text-gray-700 hover:text-purple-600">个人服务</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-purple-600">关于我们</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-purple-600">联系我们</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white section-padding pt-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-white rounded-full filter blur-3xl floating"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-white rounded-full filter blur-3xl floating" style="animation-delay: 1s;"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center animate-fade-in">
+                <div class="inline-block mb-4 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold">
+                    <i class="fas fa-star mr-2"></i>专业的加密钱包解决方案
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    专业的加密钱包
+                    <span class="block mt-2">解决方案</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-10 text-purple-100 max-w-2xl mx-auto leading-relaxed">
+                    为企业和个人用户提供安全、便捷的多链数字资产管理服务
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#b2b" class="btn-primary text-white px-10 py-4 rounded-xl font-semibold text-lg relative z-10">
+                        <i class="fas fa-building mr-2"></i>企业服务
+                    </a>
+                    <a href="#b2c" class="bg-white/10 backdrop-blur-sm text-white px-10 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition border-2 border-white/30 relative z-10">
+                        <i class="fas fa-user mr-2"></i>个人服务
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="bg-white py-16 -mt-8 relative z-20">
+        <div class="container mx-auto px-4">
+            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="fade-in-up">
+                        <div class="text-5xl md:text-6xl font-bold stat-number mb-3" data-target="100">0</div>
+                        <div class="text-gray-600 font-medium">活跃用户</div>
+                    </div>
+                    <div class="fade-in-up" style="transition-delay: 0.1s;">
+                        <div class="text-5xl md:text-6xl font-bold stat-number mb-3" data-target="20">0</div>
+                        <div class="text-gray-600 font-medium">企业客户</div>
+                    </div>
+                    <div class="fade-in-up" style="transition-delay: 0.2s;">
+                        <div class="text-5xl md:text-6xl font-bold stat-number mb-3" data-target="6">0</div>
+                        <div class="text-gray-600 font-medium">支持链</div>
+                    </div>
+                    <div class="fade-in-up" style="transition-delay: 0.3s;">
+                        <div class="text-5xl md:text-6xl font-bold stat-number mb-3" data-target="99.9">0</div>
+                        <div class="text-gray-600 font-medium">安全可靠</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section id="services" class="section-padding bg-pattern">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 section-title">我们的服务</h2>
+                <p class="text-xl text-gray-600 mt-6">为不同需求的客户提供专业解决方案</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white rounded-2xl p-8 card-hover shadow-lg fade-in-up">
+                    <div class="w-16 h-16 icon-wrapper bg-purple-100 rounded-2xl flex items-center justify-center mb-6 glow-effect">
+                        <i class="fas fa-building text-3xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">B2B 企业服务</h3>
+                    <p class="text-gray-600 mb-6">为企业提供定制化钱包解决方案、API集成、企业级安全和托管服务</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            白标钱包解决方案
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            API/SDK 集成服务
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            企业级安全服务
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            数字资产托管
+                        </li>
+                    </ul>
+                    <a href="#b2b" class="text-purple-600 font-semibold hover:underline">
+                        了解更多 <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <div class="bg-white rounded-2xl p-8 card-hover shadow-lg fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="w-16 h-16 icon-wrapper bg-blue-100 rounded-2xl flex items-center justify-center mb-6 glow-effect">
+                        <i class="fas fa-user text-3xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">B2C 个人服务</h3>
+                    <p class="text-gray-600 mb-6">为个人用户提供安全、便捷的多链钱包、交易、NFT和质押服务</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            免费多链钱包
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            代币交易与兑换
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            NFT 管理
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            质押与收益
+                        </li>
+                    </ul>
+                    <a href="#b2c" class="text-purple-600 font-semibold hover:underline">
+                        了解更多 <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- B2B Services -->
+    <section id="b2b" class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 section-title">B2B 企业服务</h2>
+                <p class="text-xl text-gray-600 mt-6">为企业提供专业的加密钱包解决方案</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 白标钱包 -->
+                <div class="bg-white rounded-2xl p-6 service-card shadow-md fade-in-up">
+                    <div class="w-14 h-14 icon-wrapper bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-palette text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">白标钱包解决方案</h3>
+                    <p class="text-gray-600 mb-4 text-sm">完全品牌定制，功能模块化配置，私有化部署选项</p>
+                    <div class="mb-4">
+                        <span class="price-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            ¥35万 - ¥140万
+                        </span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• 品牌定制（Logo、颜色、UI）</li>
+                        <li>• 功能模块化配置</li>
+                        <li>• 多语言支持</li>
+                        <li>• 私有化部署</li>
+                    </ul>
+                </div>
+
+                <!-- API/SDK -->
+                <div class="bg-white rounded-2xl p-6 service-card shadow-md fade-in-up" style="transition-delay: 0.1s;">
+                    <div class="w-14 h-14 icon-wrapper bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-code text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">API/SDK 集成</h3>
+                    <p class="text-gray-600 mb-4 text-sm">完整的 API 和 SDK，支持快速集成开发</p>
+                    <div class="mb-4">
+                        <span class="price-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            ¥3,500 - ¥14,000/月
+                        </span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• RESTful API</li>
+                        <li>• WebSocket 实时数据</li>
+                        <li>• 多语言 SDK</li>
+                        <li>• 技术文档支持</li>
+                    </ul>
+                </div>
+
+                <!-- 企业级安全 -->
+                <div class="bg-white rounded-2xl p-6 service-card shadow-md fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="w-14 h-14 icon-wrapper bg-red-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-2xl text-red-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">企业级安全</h3>
+                    <p class="text-gray-600 mb-4 text-sm">多重签名、HSM集成、KYC/AML合规工具</p>
+                    <div class="mb-4">
+                        <span class="price-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            ¥21万 - ¥105万/年
+                        </span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• 多重签名钱包</li>
+                        <li>• HSM 硬件安全</li>
+                        <li>• KYC/AML 合规</li>
+                        <li>• 安全审计监控</li>
+                    </ul>
+                </div>
+
+                <!-- 托管服务 -->
+                <div class="bg-white rounded-2xl p-6 service-card shadow-md fade-in-up" style="transition-delay: 0.3s;">
+                    <div class="w-14 h-14 icon-wrapper bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-vault text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">数字资产托管</h3>
+                    <p class="text-gray-600 mb-4 text-sm">专业的数字资产托管服务，冷热钱包分离</p>
+                    <div class="mb-4">
+                        <span class="price-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            资产总额 0.15% - 0.5%/年
+                        </span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• 冷热钱包分离</li>
+                        <li>• 多重签名管理</li>
+                        <li>• 24/7 监控</li>
+                        <li>• 保险保障</li>
+                    </ul>
+                </div>
+
+                <!-- 数据分析 -->
+                <div class="bg-white rounded-2xl p-6 service-card shadow-md fade-in-up" style="transition-delay: 0.4s;">
+                    <div class="w-14 h-14 icon-wrapper bg-yellow-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-2xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">数据分析服务</h3>
+                    <p class="text-gray-600 mb-4 text-sm">交易数据分析、用户行为分析、合规报告</p>
+                    <div class="mb-4">
+                        <span class="price-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            ¥7,000 - ¥35,000/月
+                        </span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• 交易数据分析</li>
+                        <li>• 用户行为分析</li>
+                        <li>• 合规报告生成</li>
+                        <li>• 自定义仪表板</li>
+                    </ul>
+                </div>
+
+                <!-- 定制开发 -->
+                <div class="bg-white rounded-2xl p-6 service-card shadow-md fade-in-up" style="transition-delay: 0.5s;">
+                    <div class="w-14 h-14 icon-wrapper bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-cogs text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">定制开发</h3>
+                    <p class="text-gray-600 mb-4 text-sm">根据企业需求定制化开发功能</p>
+                    <div class="mb-4">
+                        <span class="price-badge text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            定制化定价
+                        </span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• 功能定制开发</li>
+                        <li>• 第三方服务集成</li>
+                        <li>• 自定义链支持</li>
+                        <li>• 专属技术支持</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-12 fade-in-up">
+                <a href="#contact" class="btn-primary text-white px-10 py-4 rounded-xl font-semibold text-lg inline-block">
+                    <i class="fas fa-envelope mr-2"></i>联系商务合作
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- B2C Services -->
+    <section id="b2c" class="section-padding bg-gradient-to-b from-gray-50 to-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 section-title">B2C 个人服务</h2>
+                <p class="text-xl text-gray-600 mt-6">为个人用户提供安全、便捷的数字钱包体验</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <!-- 免费钱包 -->
+                <div class="bg-white rounded-2xl p-6 service-card shadow-lg fade-in-up">
+                    <div class="w-14 h-14 icon-wrapper bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-wallet text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">免费多链钱包</h3>
+                    <p class="text-gray-600 mb-4 text-sm">支持 ETH、BSC、Solana 等多链资产管理</p>
+                    <div class="mb-4">
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            完全免费
+                        </span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• 多链资产管理</li>
+                        <li>• 代币交易与兑换</li>
+                        <li>• DApp 浏览器</li>
+                        <li>• NFT 管理</li>
+                    </ul>
+                </div>
+
+                <!-- 高级订阅 -->
+                <div class="bg-white rounded-2xl p-6 service-card shadow-lg border-2 border-purple-200 fade-in-up" style="transition-delay: 0.1s;">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="w-14 h-14 icon-wrapper bg-purple-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-star text-2xl text-purple-600"></i>
+                        </div>
+                        <span class="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">推荐</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">高级订阅 Pro</h3>
+                    <p class="text-gray-600 mb-4 text-sm">享受更多高级功能和优先支持</p>
+                    <div class="mb-4">
+                        <span class="text-2xl font-bold gradient-text">¥69</span>
+                        <span class="text-gray-600">/月</span>
+                        <span class="text-sm text-gray-500 ml-2">或 ¥699/年</span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• 优先客服支持</li>
+                        <li>• 高级安全功能</li>
+                        <li>• 无广告体验</li>
+                        <li>• 专属 NFT 徽章</li>
+                    </ul>
+                </div>
+
+                <!-- 交易服务 -->
+                <div class="bg-white rounded-2xl p-6 service-card shadow-lg fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="w-14 h-14 icon-wrapper bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-exchange-alt text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">代币交易服务</h3>
+                    <p class="text-gray-600 mb-4 text-sm">多 DEX 聚合，最优价格路由</p>
+                    <div class="mb-4">
+                        <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            手续费 0.1% - 0.3%
+                        </span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• 多 DEX 聚合</li>
+                        <li>• 最优价格路由</li>
+                        <li>• 限价订单</li>
+                        <li>• 交易历史分析</li>
+                    </ul>
+                </div>
+
+                <!-- NFT 市场 -->
+                <div class="bg-white rounded-2xl p-6 service-card shadow-lg fade-in-up" style="transition-delay: 0.3s;">
+                    <div class="w-14 h-14 icon-wrapper bg-pink-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-images text-2xl text-pink-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">NFT 市场</h3>
+                    <p class="text-gray-600 mb-4 text-sm">NFT 展示、管理和跨市场交易</p>
+                    <div class="mb-4">
+                        <span class="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            交易手续费 2.5%
+                        </span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• NFT 展示与管理</li>
+                        <li>• 跨市场交易</li>
+                        <li>• NFT 铸造工具</li>
+                        <li>• 收藏品分析</li>
+                    </ul>
+                </div>
+
+                <!-- 质押收益 -->
+                <div class="bg-white rounded-2xl p-6 service-card shadow-lg fade-in-up" style="transition-delay: 0.4s;">
+                    <div class="w-14 h-14 icon-wrapper bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-coins text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">质押与收益</h3>
+                    <p class="text-gray-600 mb-4 text-sm">多链代币质押，流动性挖矿</p>
+                    <div class="mb-4">
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            收益分成 10% - 20%
+                        </span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• 多链代币质押</li>
+                        <li>• 流动性挖矿</li>
+                        <li>• 收益自动复投</li>
+                        <li>• 收益追踪分析</li>
+                    </ul>
+                </div>
+
+                <!-- DApp 浏览器 -->
+                <div class="bg-white rounded-2xl p-6 service-card shadow-lg fade-in-up" style="transition-delay: 0.5s;">
+                    <div class="w-14 h-14 icon-wrapper bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-globe text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">DApp 浏览器</h3>
+                    <p class="text-gray-600 mb-4 text-sm">内置浏览器，安全访问 Web3 DApp</p>
+                    <div class="mb-4">
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            免费使用
+                        </span>
+                    </div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• 内置浏览器</li>
+                        <li>• DApp 推荐</li>
+                        <li>• 安全连接</li>
+                        <li>• 书签管理</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center fade-in-up">
+                <a href="index.html" class="btn-primary text-white px-10 py-4 rounded-xl font-semibold text-lg inline-block">
+                    <i class="fas fa-download mr-2"></i>立即下载体验
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section-padding bg-pattern">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 section-title">核心优势</h2>
+                <p class="text-xl text-gray-600 mt-6">为什么选择 MAToken</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="text-center fade-in-up bg-white rounded-2xl p-8 shadow-lg card-hover">
+                    <div class="w-20 h-20 icon-wrapper bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6 glow-effect">
+                        <i class="fas fa-shield-alt text-4xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">安全可靠</h3>
+                    <p class="text-gray-600">企业级安全架构，多重签名，硬件安全模块支持</p>
+                </div>
+                <div class="text-center fade-in-up bg-white rounded-2xl p-8 shadow-lg card-hover" style="transition-delay: 0.2s;">
+                    <div class="w-20 h-20 icon-wrapper bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 glow-effect">
+                        <i class="fas fa-link text-4xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">多链支持</h3>
+                    <p class="text-gray-600">支持 Ethereum、BSC、Solana、Polygon 等主流链</p>
+                </div>
+                <div class="text-center fade-in-up bg-white rounded-2xl p-8 shadow-lg card-hover" style="transition-delay: 0.4s;">
+                    <div class="w-20 h-20 icon-wrapper bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6 glow-effect">
+                        <i class="fas fa-rocket text-4xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">快速集成</h3>
+                    <p class="text-gray-600">完善的 API 和 SDK，快速集成到您的业务系统</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center fade-in-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 section-title">关于 MAToken</h2>
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                    MAToken 是一家专注于加密钱包解决方案的科技公司，致力于为企业和个人用户提供安全、便捷、功能完善的数字资产管理服务。
+                </p>
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                    我们拥有专业的技术团队和丰富的行业经验，已为多家金融机构、交易所和 DeFi 协议提供定制化钱包解决方案。
+                </p>
+                <div class="grid md:grid-cols-3 gap-6 mt-12">
+                    <div>
+                        <div class="text-3xl font-bold gradient-text mb-2">2024</div>
+                        <div class="text-gray-600">成立年份</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold gradient-text mb-2">50+</div>
+                        <div class="text-gray-600">团队成员</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold gradient-text mb-2">100K+</div>
+                        <div class="text-gray-600">服务用户</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section-padding bg-pattern">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 section-title">联系我们</h2>
+                <p class="text-xl text-gray-600 mt-6">我们期待与您合作</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">联系方式</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-purple-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">商务合作</div>
+                                <div class="text-gray-600">business@matoken.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-headset text-blue-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">技术支持</div>
+                                <div class="text-gray-600">support@matoken.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-phone text-green-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">客服热线</div>
+                                <div class="text-gray-600">400-XXX-XXXX</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-globe text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">官方网站</div>
+                                <div class="text-gray-600">https://matoken.com</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <h4 class="font-semibold mb-4">关注我们</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-purple-100 transition">
+                                <i class="fab fa-twitter text-gray-600"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-purple-100 transition">
+                                <i class="fab fa-telegram text-gray-600"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-purple-100 transition">
+                                <i class="fab fa-discord text-gray-600"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-6">在线咨询</h3>
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">姓名</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:outline-none" placeholder="请输入您的姓名">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">邮箱</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:outline-none" placeholder="your@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">公司/组织</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:outline-none" placeholder="请输入公司名称">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">咨询内容</label>
+                            <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:outline-none" placeholder="请描述您的需求..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full btn-primary text-white py-4 rounded-xl font-semibold relative overflow-hidden">
+                            <span class="relative z-10">提交咨询</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="logo.jpg" alt="MAToken Logo" class="w-10 h-10 rounded-lg">
+                        <span class="text-xl font-bold">MAToken</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">专业的加密钱包解决方案提供商</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">产品</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#b2b" class="hover:text-white transition">企业服务</a></li>
+                        <li><a href="#b2c" class="hover:text-white transition">个人服务</a></li>
+                        <li><a href="index.html" class="hover:text-white transition">下载应用</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">支持</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">帮助中心</a></li>
+                        <li><a href="#" class="hover:text-white transition">API 文档</a></li>
+                        <li><a href="#contact" class="hover:text-white transition">联系我们</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">法律</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">隐私政策</a></li>
+                        <li><a href="#" class="hover:text-white transition">服务条款</a></li>
+                        <li><a href="#" class="hover:text-white transition">合规声明</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2026 MAToken. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scroll');
+                navbar.classList.remove('gradient-bg');
+            } else {
+                navbar.classList.remove('navbar-scroll');
+                navbar.classList.add('gradient-bg');
+            }
+        });
+
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileCloseBtn = document.getElementById('mobile-close-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.remove('hidden');
+        });
+
+        mobileCloseBtn.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('感谢您的咨询！我们会尽快与您联系。');
+            this.reset();
+        });
+
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Number counter animation
+        function animateCounter(element) {
+            const target = parseFloat(element.getAttribute('data-target'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    if (target % 1 === 0) {
+                        element.textContent = Math.floor(current) + '+';
+                    } else {
+                        element.textContent = current.toFixed(1) + '%';
+                    }
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    if (target % 1 === 0) {
+                        element.textContent = target + '+';
+                    } else {
+                        element.textContent = target + '%';
+                    }
+                }
+            };
+
+            updateCounter();
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                    entry.target.classList.add('counted');
+                    animateCounter(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-number').forEach(el => {
+            statsObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
